@@ -1,0 +1,13 @@
+body{
+    background-color: rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
+    .hidden-letter{
+        display: inline-block;
+        width: 20px;
+        margin: 5px;
+        font-size: 24px;
+    }
+    .guessed-letters{
+        margin-top: 20px;
+    }
+}
