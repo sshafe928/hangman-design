@@ -1,3 +1,34 @@
+document.getElementById("play-button").addEventListener("click", function() {
+    document.getElementById("main-menu").style.display = "none";
+    document.getElementById("overlay").style.display = "block";
+    document.body.style.overflow = "hidden"; // Prevent scrolling while overlay is active
+
+    // Simulate fade effect
+    setTimeout(function() {
+        document.getElementById("overlay").style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }, 500);
+
+    setTimeout(function() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("hangman-container").style.display = "block";
+        document.body.style.overflow = "auto"; // Restore scrolling
+    }, 1000);
+});
+
+
+
+$(document).ready(function(){
+    $('#play-button').click(function() {
+        $('.title, #play-button').addClass('hidden');
+        setTimeout(function() {
+            $('.title').css('opacity', '0');
+            $('#play-button').remove();
+        }, 500); // Delay in milliseconds
+    });
+});
+
+
+
 $(document).ready(function(){
     var words = ['banana','epiphany','lettuce','potato','headache','haircut'];
 

@@ -7,16 +7,26 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <h1>Hangman</h1>
-    <div id="word-container"></div>
-    <div id="guess-container" class="guessed-letters"></div>
-    <div id="remaining-guesses"></div>
-    <button id="reset-button">Reset button</button>
-    <script
-    src="https://code.jquery.com/jquery-3.7.1.js"
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous">
-</script>
-<script src="script.js"></script>
+    <header>
+        <h1 id="title">Sabrina's Hangman</h1>
+        <button id="play-button">Play</button>
+    </header>
+
+    <main id="main-menu">
+        
+    </main>
+
+    <main id="hangman-container" style="display: none;">
+        <img src="./images/stand.png" alt="man" id="man">
+        <div id="word-container"></div>
+        <div id="guess-container" class="guessed-letters"></div>
+        <div id="remaining-guesses"></div>
+        <button id="reset-button">Reset button</button>
+    </main>
+
+    <div id="overlay"></div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
