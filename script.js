@@ -15,8 +15,6 @@ document.getElementById("play-button").addEventListener("click", function() {
     }, 1000);
 });
 
-
-
 $(document).ready(function(){
     $('#play-button').click(function() {
         $('.title, #play-button').addClass('hidden');
@@ -25,15 +23,12 @@ $(document).ready(function(){
             $('#play-button').remove();
         }, 500); // Delay in milliseconds
     });
-});
 
-
-
-$(document).ready(function(){
     var words = ['banana','epiphany','lettuce','potato','headache','haircut'];
 
     var chosenWord = words[Math.floor(Math.random()*words.length)];
     var guessedLetters = [];
+    var wrongLetters = []; // Add wrong letters array
     var remainingGuesses = 6;
 
     // Display underscore for letters in chosen words
@@ -52,6 +47,8 @@ $(document).ready(function(){
         if(chosenWord.indexOf(letter) === -1){
             remainingGuesses--;
             $('#remaining-guesses').text("Remaining Guesses: " + remainingGuesses);
+            wrongLetters.push(letter); // Add wrong letter to array
+            updateWrongLettersEl(); // Update wrong letters display
         } else {
             // Reveal correctly guessed letter
             $('.hidden-letter').each(function(index){
@@ -61,6 +58,7 @@ $(document).ready(function(){
             });
         }
 
+        guessedLetters.push(letter); // Add letter to guessed letters array
         updateGuesses();
         checkGameStatus();
     }
@@ -76,9 +74,37 @@ $(document).ready(function(){
         }
     }
 
+    // Function to reveal a part of the hangman when guessed wrong
+    function revealHangmanPiece() {
+        var hiddenPiece = $('.hangman-piece.hidden').first();
+        hiddenPiece.removeClass('hidden');
+    }
+
+    // Function to update wrong letters display
+    function updateWrongLettersEl() {
+        var wrongLettersEl = $('#guess-container');
+        var figureParts = $('.figure-part');
+
+        wrongLettersEl.html(`
+            ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+            ${wrongLetters.map(letter => `<span>${letter}</span>`).join('')}
+        `);
+
+        figureParts.each(function(index) {
+            const errors = wrongLetters.length;
+
+            if (index < errors) {
+                $(this).css('display', 'block');
+            } else {
+                $(this).css('display', 'none');
+            }
+        });
+    }
+
     // Function to reset the game
     function resetGame(){
         guessedLetters = [];
+        wrongLetters = []; // Reset wrong letters array
         remainingGuesses = 6;
         $('#remaining-guesses').text('Remaining Guesses: ' + remainingGuesses);
         $('#word-container').empty();
@@ -87,13 +113,13 @@ $(document).ready(function(){
             $('#word-container').append('<div class="hidden-letter">_</div>');
         }
         updateGuesses();
+        updateWrongLettersEl(); // Reset wrong letters display
     }
 
     // Event handler for key presses
     $(document).keypress(function(event){
         var letter = String.fromCharCode(event.which).toLowerCase();
         if(letter.match(/[a-z]/) && guessedLetters.indexOf(letter) === -1){
-            guessedLetters.push(letter);
             checkGuess(letter);
         }
     });

@@ -18,6 +18,20 @@
 
     <main id="hangman-container" style="display: none;">
         <img src="./images/stand.png" alt="man" id="man">
+        <div class="hangman-pieces">
+            <svg height="250" width="200" class="figure-container">
+                <!-- Head -->
+                <circle cx="140" cy="70" r="20" class="figure-part" />
+                <!-- Body -->
+                <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
+                <!-- Arms -->
+                <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
+                <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
+                <!-- Legs -->
+                <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
+                <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
+            </svg>
+        </div>
         <div id="word-container"></div>
         <div id="guess-container" class="guessed-letters"></div>
         <div id="remaining-guesses"></div>
